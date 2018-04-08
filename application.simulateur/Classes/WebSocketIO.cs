@@ -13,7 +13,7 @@ namespace application.simulateur.Classes
 
         private static WebSocketIO currentInstance;
 
-        private static String SocketHost = "http://159.89.117.119:8080";
+        public static String SocketHost = "http://159.89.117.119:8080";
 
         public static String LinkID;
 

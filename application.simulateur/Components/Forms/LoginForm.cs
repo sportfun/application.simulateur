@@ -46,6 +46,7 @@ namespace application.simulateur.Components.Forms
             }
             else
             {
+                Classes.WebSocketIO.SocketHost = String.Format("http://{0}:{1}", this.txtHost, this.txtPort);
                 Classes.WebSocketIO.LinkID = this.lblLinkID.Text;
                 this.DialogResult = DialogResult.OK;
             }

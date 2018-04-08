@@ -119,6 +119,7 @@
             this.lblError.TabIndex = 9;
             this.lblError.Text = "lblError";
             this.lblError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblError.Visible = false;
             // 
             // LoginForm
             // 
