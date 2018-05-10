@@ -48,10 +48,11 @@ namespace application.simulateur
             body.Add("module", "rpm");
             body.Add("value", rpm);
 
-            Classes.WebSocketIO.GetInstance().SendBody("command", body);
+            Classes.WebSocketIO.GetInstance().SendBody("data", body);
 
             DateTime dt = DateTime.Now;
-            textBox.AppendText("[" + dt.Hour + ":" + dt.Minute + ":" + dt.Second + ":" + dt.Millisecond + "]  \t\tRPM: " + rpm + ".\n");
+
+            textBox.AppendText("[" + dt.Hour + ":" + dt.Minute + ":" + dt.Second + ":" + dt.Millisecond + "]  \t\t" + body.ToString(Newtonsoft.Json.Formatting.None) + ".\n");
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -107,7 +108,7 @@ namespace application.simulateur
         public bool OnCommandMessageReceived(Classes.EventSocketArgs args)
         {
             JObject JsonObject = JObject.Parse(args.Data.ToString());
-
+            Console.WriteLine(JsonObject.ToString());
             switch (JsonObject["body"]["command"].ToString())
             {
                 case "start_game":
@@ -119,7 +120,7 @@ namespace application.simulateur
 
                     break;
 
-                case "stop_game":
+                case "end_game":
                     this.Invoke(new Action(() =>
                     {
                         TimerInterval.Stop();
@@ -142,7 +143,7 @@ namespace application.simulateur
             body.Add("module", "controller");
             body.Add("value", "0");
 
-            Classes.WebSocketIO.GetInstance().SendBody("command", body);
+            Classes.WebSocketIO.GetInstance().SendBody("data", body);
 
             DateTime dt = DateTime.Now;
             textBox.AppendText("[" + dt.Hour + ":" + dt.Minute + ":" + dt.Second + ":" + dt.Millisecond + "]\t" + body.ToString(Newtonsoft.Json.Formatting.None) + ".\n");
@@ -155,7 +156,7 @@ namespace application.simulateur
             body.Add("module", "controller");
             body.Add("value", "1");
 
-            Classes.WebSocketIO.GetInstance().SendBody("command", body);
+            Classes.WebSocketIO.GetInstance().SendBody("data", body);
 
             DateTime dt = DateTime.Now;
             textBox.AppendText("[" + dt.Hour + ":" + dt.Minute + ":" + dt.Second + ":" + dt.Millisecond + "]\t" + body.ToString(Newtonsoft.Json.Formatting.None) + ".\n");
@@ -168,7 +169,7 @@ namespace application.simulateur
             body.Add("module", "controller");
             body.Add("value", "2");
 
-            Classes.WebSocketIO.GetInstance().SendBody("command", body);
+            Classes.WebSocketIO.GetInstance().SendBody("data", body);
 
             DateTime dt = DateTime.Now;
             textBox.AppendText("[" + dt.Hour + ":" + dt.Minute + ":" + dt.Second + ":" + dt.Millisecond + "]\t" + body.ToString(Newtonsoft.Json.Formatting.None) + ".\n");
@@ -181,7 +182,7 @@ namespace application.simulateur
             body.Add("module", "controller");
             body.Add("value", "3");
 
-            Classes.WebSocketIO.GetInstance().SendBody("command", body);
+            Classes.WebSocketIO.GetInstance().SendBody("data", body);
 
             DateTime dt = DateTime.Now;
             textBox.AppendText("[" + dt.Hour + ":" + dt.Minute + ":" + dt.Second + ":" + dt.Millisecond + "]\t" + body.ToString(Newtonsoft.Json.Formatting.None) + ".\n");
